@@ -1,1 +1,1 @@
-# sus-bot
+# sus discord bot
