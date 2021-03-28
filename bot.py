@@ -17,7 +17,7 @@ bot = commands.Bot(command_prefix=prefix)
 # susout command
 @bot.command()
 async def susout(ctx, arg1, *, arg2):
-    await ctx.send('{0.author} accused {1} of *{2}*'.format(ctx, arg1, arg2))
+    await ctx.send('{0.author.mention} accused {1} of *{2}*'.format(ctx, arg1, arg2))
     
 # susrate command
 @bot.command()
