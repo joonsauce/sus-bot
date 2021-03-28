@@ -1,2 +1,2 @@
-prefix = "sus"
-description = "SUS!!!!11!11!!"
+prefix = "s!"
+description = "Sus bot, made by joonsauce"
