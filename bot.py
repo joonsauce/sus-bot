@@ -1,61 +1,38 @@
-import asyncio
-import time
 import discord
-import os
-import pandas
-import json
+import logging
 import random
-from discord.ext import commands
 from setting import *
+from discord.ext import commands
 
-# discord gateway intents
-intents = discord.Intents.default()
-allowed_mentions = discord.AllowedMentions(everyone=False,
-                                           users=True,
-                                           roles=False)
+# logger
+logger = logging.getLogger('discord')
+logger.setLevel(logging.DEBUG)
+handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
+handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+logger.addHandler(handler)
 
-# bot instance
-bot = discord.ext.commands.Bot(command_prefix=prefix,
-                               intents=intents,
-                               description=description,
-                               case_insensitive=True,
-                               allowed_mentions=allowed_mentions)
+# bot setup
+bot = commands.Bot(command_prefix=prefix)
 
-TOKEN = 'insert token here'
-
-client = discord.Client()
-
+# susout command
 @bot.command()
-async def sus(ctx):
-    await ctx.send(f"Say something")
-
-    def check(message):
-        return message.author == ctx.author and len(message.attachments) == 1
-
-    msg = discord.Message
-    try:
-        msg = await bot.wait_for('message', check=check, timeout=60)
-    except asyncio.TimeoutError:
-        await ctx.send('Timed out. Please try again in a minute')
-
-@client.event
-async def on_message(message):
-    ari_songs = [
-
-    ]
-
-
-    if message.author == client.user:
-        return
-
-    if 'sus' in message.content.lower():
-        await message.channel.send('SUS!!!111!!!!!!')
-
-    if message.content == 'sus p ari':
+async def susout(ctx, arg1, *, arg2):
+    await ctx.send('{0.author} accused {1} of *{2}*'.format(ctx, arg1, arg2))
+    
+# susrate command
+@bot.command()
+async def susrate(ctx, *, message):
+    # of any person; repeat as many times as needed
+    if message == "person-tagged":
+        await ctx.send(message + "'s susrate is x%")
+        
+# ari command; incomplete 
+@bot.command()
+async def ari(ctx, *, message):
+    ari_songs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55]
+    if message == "random":
         response = random.choice(ari_songs)
-        await message.channel.send()
+    await ctx.send(response)
 
-
-
-
-client.run(TOKEN)
+bot.run('your-token')
