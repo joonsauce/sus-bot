@@ -49,11 +49,44 @@ async def ari(ctx, *, message):
 async def join(ctx):
     channel = ctx.author.voice.channel
     await channel.connect()
+    """
+    small note about this command:
+    bot will throw lots of errors if used when connected
+    but does not affect bot so dont worry
+    a fix for this will come sometime
+    """
 
 # leave command; leaves voice channel
 @bot.command()
 async def leave(ctx):
-    await ctx.voice_client.disconnect()
+    if ctx.voice_client.is_connected:
+        await ctx.voice_client.disconnect()
+    else:
+        await ctx.send("Bot is not in a voice channel.")
+
+# pause command; pauses music playing
+@bot.command()
+async def pause(ctx):
+    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+    if voice.is_playing():
+        voice.pause()
+    else:
+        await ctx.send("Currently paused!")
+
+# resume command; resumes music
+@bot.command()
+async def resume(ctx):
+    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+    if voice.is_paused():
+        voice.resume()
+    else:
+        await ctx.send("Currently playing!")
+
+# stop command; stops playing music
+@bot.command()
+async def stop(ctx):
+    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+    voice.stop()
 
 # runs bot with bot token
 bot.run('your-token')
