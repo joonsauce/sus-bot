@@ -14,12 +14,12 @@ logger.addHandler(handler)
 # bot setup
 bot = commands.Bot(command_prefix=prefix)
 
-# susout command
+# susout command; a user accuses another user of something suspicious
 @bot.command()
 async def susout(ctx, arg1, *, arg2):
     await ctx.send('{0.author.mention} accused {1} of *{2}*'.format(ctx, arg1, arg2))
     
-# susrate command
+# susrate command; rates how sus a person is; is a static value
 @bot.command()
 async def susrate(ctx, *, message):
     # of any person; repeat as many times as needed
@@ -29,13 +29,31 @@ async def susrate(ctx, *, message):
     elif message == "<@!825031801789481025>":
         await ctx.send(message + "'s susrate is 100%")
         
-# ari command; incomplete 
+# ari command; incomplete; plays random song from a different bot 
 @bot.command()
 async def ari(ctx, *, message):
-    ari_songs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
-                 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55]
+    ari_song = []
     if message == "random":
-        response = random.choice(ari_songs)
-    await ctx.send(response)
+        song = random.choice(ari_song)
+    else:
+        number = message
+        song = ari_song[number]
+    channel = ctx.author.voice.channel
+    try:
+        await channel.connect()
+    except:
+        await ctx.send("!p {0}".format(song))
 
+# join command; joins voice channel
+@bot.command()
+async def join(ctx):
+    channel = ctx.author.voice.channel
+    await channel.connect()
+
+# leave command; leaves voice channel
+@bot.command()
+async def leave(ctx):
+    await ctx.voice_client.disconnect()
+
+# runs bot with bot token
 bot.run('your-token')
