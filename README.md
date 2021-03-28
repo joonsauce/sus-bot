@@ -28,6 +28,7 @@ There are a plenty of commands to choose from. The prefix is `s!`
 - ari {arg}
   - Two subcommands: `random` or `{number}`
   - The command either plays a random song by Ariana Grande from a chosen playlist, or chosen by a member of the serer.
+  - The command can be edited so it plays songs from another person or some other playlist.
   - A music bot must be added to the server to be used, but a feature to play music directly from this bot will be coming soon.
   - The bot sends a command to another bot so that the music bot can play the song.
 
