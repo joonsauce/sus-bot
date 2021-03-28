@@ -34,4 +34,4 @@ There are a plenty of commands to choose from. The prefix is `s!`
 # License
 This project is released under the MIT license, see `LICENSE` for more info.
 # The Team
-Joonseo Lee- - [LinkedIn](https://www.linkedin.com/joonsauce)
+Joonseo Lee - [LinkedIn](https://www.linkedin.com/joonsauce)
