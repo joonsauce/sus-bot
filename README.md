@@ -14,7 +14,9 @@
 - [The Team](#the-team)
 # About the Project
 A discord bot with influence from the popular indie video game Among Us, with features 
-that combines some qualities of other bots.
+that combines some qualities of other bots. The bot was intended to be used within one server, 
+so many parts are very server-specific. There is no public link for this bot. However, you can modify and 
+use this bot however you like under the MIT license.
 # Usage
 At the moment, the bot is configured to be customized per server; some commands need to be 
 hardwired in by the person who wants to use them.
