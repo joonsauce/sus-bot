@@ -25,6 +25,9 @@ async def susrate(ctx, *, message):
     # of any person; repeat as many times as needed
     if message == "person-tagged":
         await ctx.send(message + "'s susrate is x%")
+    # example of this bot
+    elif message == "<@!825031801789481025>":
+        await ctx.send(message + "'s susrate is 100%")
         
 # ari command; incomplete 
 @bot.command()
