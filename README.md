@@ -25,16 +25,16 @@ There are a plenty of commands to choose from. The prefix is `s!`
 ### Command Types
 - susrate {user}
   - This command rates a chosen member of the server based on how sus they are. The value is static and does not change.
-- susout {user}
-  - This command targets a user of doing something sus. The username of the sender still needs fix, a fix will be available soon.
-- ari {arg}
+- susout {user} {action}
+  - This command targets a user of doing something sus. The bot will return {author} sussed {user} of {action}.
+- randomsong {arg}
   - Two subcommands: `random` or `{number}`
-  - The command either plays a random song by Ariana Grande from a chosen playlist, or chosen by a member of the serer.
-  - The command can be edited so it plays songs from another person or some other playlist.
-  - A music bot must be added to the server to be used, but a feature to play music directly from this bot will be coming soon.
-  - The bot sends a command to another bot so that the music bot can play the song.
+  - The command either plays a random song from the song bank, or a song chosen by a member of the server.
+  - The music bot portion of the bot is still in the works, but is coming soon.
+- medbay
+  - This command returns a simulated medbay scan from the video game Among Us. The value is static, set per user in each server.
 
 # License
 This project is released under the MIT license, see `LICENSE` for more info.
 # The Team
-Joonseo Lee - [LinkedIn](https://www.linkedin.com/joonsauce)
+Joonseo Lee - [LinkedIn](https://www.linkedin.com/joonsauce), [Website](http://joonsauce.me)
