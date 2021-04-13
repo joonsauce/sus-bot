@@ -31,8 +31,9 @@ There are a plenty of commands to choose from. The prefix is `s!`
   - Two subcommands: `random` or `{number}`
   - The command either plays a random song from the song bank, or a song chosen by a member of the server.
   - The music bot portion of the bot is still in the works, but is coming soon.
-- medbay
+- scan
   - This command returns a simulated medbay scan from the video game Among Us. The value is static, set per user in each server.
+  - If there is more than one user to use the medbay scan, `<@!usertag>` must be used. If only one person, use `<@usertag>` instead.
 
 # License
 This project is released under the MIT license, see `LICENSE` for more info.
