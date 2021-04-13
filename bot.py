@@ -1,10 +1,14 @@
 import discord
 import logging
 import random
+import youtube_dl
+import os
 from setting import *
 from discord.ext import commands
+from songs import *
+from discord.voice_client import VoiceClient
 
-# logger
+# logs bot events
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
@@ -14,55 +18,78 @@ logger.addHandler(handler)
 # bot setup
 bot = commands.Bot(command_prefix=prefix)
 
+# different sus commands are listed below
+
 # susout command; a user accuses another user of something suspicious
 @bot.command()
 async def susout(ctx, arg1, *, arg2):
-    await ctx.send('{0.author.mention} accused {1} of *{2}*'.format(ctx, arg1, arg2))
-    
+    await ctx.send('{0.author.mention} sussed {1} of *{2}*'.format(ctx, arg1, arg2))
+
 # susrate command; rates how sus a person is; is a static value
 @bot.command()
 async def susrate(ctx, *, message):
-    # of any person; repeat as many times as needed
-    if message == "person-tagged":
-        await ctx.send(message + "'s susrate is x%")
-    # example of this bot
-    elif message == "<@!825031801789481025>":
-        await ctx.send(message + "'s susrate is 100%")
-        
-# ari command; incomplete; plays random song from a different bot 
+    if message == "user's tag":
+        await ctx.send(message + "'s susrate is 20%")
+
+# different among us game feature commands below
+
+# medbay command; medbay scans user
 @bot.command()
-async def ari(ctx, *, message):
-    ari_song = []
+async def scan(ctx):
+    if ctx.author.mention == "user's tag":
+        id = "GREP1"
+        ht = "1.80m"
+        wt = "69kg"
+        c = "Green"
+        bt = "O+"
+        await ctx.send("ID: " + id + " HT: " + ht + " WT: " + wt + " C: " + c + " BT: " + bt)
+
+# ari command; plays random song from a different bot; incomplete
+@bot.command()
+async def randomsong(ctx, *, message):
     if message == "random":
-        song = random.choice(ari_song)
+        song = random.choice(song_bank)
     else:
-        number = message
-        song = ari_song[number]
-    channel = ctx.author.voice.channel
+        number = int(message)
+        song = song_bank[number]
     try:
+        channel = ctx.author.voice.channel
         await channel.connect()
-    except:
-        await ctx.send("!p {0}".format(song))
+        await ctx.send("now playing: {0}".format(song))
+    except discord.errors.ClientException:
+        await ctx.send("now playing: {0}".format(song))
+    except AttributeError:
+        await ctx.send("You're not connected to a voice channel.")
+    else:
+        await ctx.send("now playing: {0}".format(song))
+
+# different music bot commands below
 
 # join command; joins voice channel
 @bot.command()
 async def join(ctx):
-    channel = ctx.author.voice.channel
-    await channel.connect()
-    """
-    small note about this command:
-    bot will throw lots of errors if used when connected
-    but does not affect bot so dont worry
-    a fix for this will come sometime
-    """
+    try:
+        channel = ctx.author.voice.channel
+        await channel.connect()
+    except discord.errors.ClientException:
+        await ctx.send("Already connected to channel!")
+    except AttributeError:
+        await ctx.send("You're not connected to a voice channel.")
+    else:
+        await ctx.send("Connected!")
 
 # leave command; leaves voice channel
 @bot.command()
 async def leave(ctx):
-    if ctx.voice_client.is_connected:
-        await ctx.voice_client.disconnect()
+    try:
+        channel = ctx.voice_client
+        await channel.disconnect()
+    except AttributeError:
+        await ctx.send("The bot is not connected to a voice channel.")
     else:
-        await ctx.send("Bot is not in a voice channel.")
+        await ctx.send("Successfully disconnected!")
+
+# EVERYTHING BELOW IS INCOMPLETE!
 
 # pause command; pauses music playing
 @bot.command()
@@ -88,5 +115,10 @@ async def stop(ctx):
     voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
     voice.stop()
 
+@bot.command()
+async def test(ctx):
+    await ctx.send("<a:emoji_test:829457269418098738>")
+
 # runs bot with bot token
 bot.run('your-token')
+
