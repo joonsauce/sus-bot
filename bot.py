@@ -115,10 +115,6 @@ async def stop(ctx):
     voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
     voice.stop()
 
-@bot.command()
-async def test(ctx):
-    await ctx.send("<a:emoji_test:829457269418098738>")
-
 # runs bot with bot token
 bot.run('your-token')
 
