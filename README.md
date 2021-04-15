@@ -34,6 +34,8 @@ There are a plenty of commands to choose from. The prefix is `s!`
 - scan
   - This command returns a simulated medbay scan from the video game Among Us. The value is static, set per user in each server.
   - If there is more than one user to use the medbay scan, `<@!usertag>` must be used. If only one person, use `<@usertag>` instead.
+- drip
+  - This command plays a specific song (in my case, Among Us Drip) in a voice channel. The song can be any you want, as long as it is formatted right.
 
 # License
 This project is released under the MIT license, see `LICENSE` for more info.
