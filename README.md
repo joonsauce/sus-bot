@@ -1,4 +1,4 @@
-# sus discord bot
+# sus bot
 
 <p align="center">
 <img src="img/susbot.png" alt="susbot logo" height=300>
