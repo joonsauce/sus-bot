@@ -2,7 +2,7 @@ import discord
 import random
 from setting import *
 from discord.ext import commands
-from song import *
+from songs import *
 from discord.voice_client import VoiceClient
 
 # different sus commands are listed below
