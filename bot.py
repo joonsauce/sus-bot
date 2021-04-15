@@ -1,22 +1,9 @@
 import discord
-import logging
 import random
-import youtube_dl
-import os
 from setting import *
 from discord.ext import commands
-from songs import *
+from song import *
 from discord.voice_client import VoiceClient
-
-# logs bot events
-logger = logging.getLogger('discord')
-logger.setLevel(logging.DEBUG)
-handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
-handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
-logger.addHandler(handler)
-
-# bot setup
-bot = commands.Bot(command_prefix=prefix)
 
 # different sus commands are listed below
 
@@ -28,7 +15,7 @@ async def susout(ctx, arg1, *, arg2):
 # susrate command; rates how sus a person is; is a static value
 @bot.command()
 async def susrate(ctx, *, message):
-    if message == "user's tag":
+    if message == "<@!unique-tag":
         await ctx.send(message + "'s susrate is 20%")
 
 # different among us game feature commands below
@@ -36,26 +23,27 @@ async def susrate(ctx, *, message):
 # medbay command; medbay scans user
 @bot.command()
 async def scan(ctx):
-    if ctx.author.mention == "user's tag":
+    if ctx.author.mention == "<@!unique-tag>":
         id = "GREP1"
         ht = "1.80m"
-        wt = "69kg"
+        wt = "67kg"
         c = "Green"
         bt = "O+"
         await ctx.send("ID: " + id + " HT: " + ht + " WT: " + wt + " C: " + c + " BT: " + bt)
 
-# ari command; plays random song from a different bot; incomplete
+# different music bot commands below
+
+# ari command; plays random song from playlist; incomplete
 @bot.command()
 async def randomsong(ctx, *, message):
     if message == "random":
-        song = random.choice(song_bank)
+        song = random.choice(song_list)
     else:
         number = int(message)
-        song = song_bank[number]
+        song = song_list[number]
     try:
         channel = ctx.author.voice.channel
         await channel.connect()
-        await ctx.send("now playing: {0}".format(song))
     except discord.errors.ClientException:
         await ctx.send("now playing: {0}".format(song))
     except AttributeError:
@@ -63,7 +51,20 @@ async def randomsong(ctx, *, message):
     else:
         await ctx.send("now playing: {0}".format(song))
 
-# different music bot commands below
+# drip command; plays among us drip
+@bot.command()
+async def drip(ctx):
+    try:
+        channel = ctx.author.voice.channel
+        await channel.connect()
+    except discord.errors.ClientException:
+        await ctx.send("Now playing: Among Us Drip")
+    except AttributeError:
+        await ctx.send("You're not connected to a voice channel.")
+    else:
+        await ctx.send("Now playing: Among Us Drip")
+    drip = discord.utils.get(bot.voice_clients)
+    drip.play(discord.FFmpegPCMAudio("drip.mp3"))
 
 # join command; joins voice channel
 @bot.command()
@@ -74,7 +75,7 @@ async def join(ctx):
     except discord.errors.ClientException:
         await ctx.send("Already connected to channel!")
     except AttributeError:
-        await ctx.send("You're not connected to a voice channel.")
+        await ctx.send("You need to be connected to a voice channel to use this command.")
     else:
         await ctx.send("Connected!")
 
@@ -89,31 +90,43 @@ async def leave(ctx):
     else:
         await ctx.send("Successfully disconnected!")
 
-# EVERYTHING BELOW IS INCOMPLETE!
-
 # pause command; pauses music playing
 @bot.command()
 async def pause(ctx):
-    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+    voice = discord.utils.get(bot.voice_clients)
     if voice.is_playing():
         voice.pause()
+        await ctx.send("Pausing!")
     else:
         await ctx.send("Currently paused!")
 
 # resume command; resumes music
 @bot.command()
 async def resume(ctx):
-    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
+    voice = discord.utils.get(bot.voice_clients)
     if voice.is_paused():
         voice.resume()
+        await ctx.send("Resuming!")
     else:
         await ctx.send("Currently playing!")
 
 # stop command; stops playing music
 @bot.command()
 async def stop(ctx):
-    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild)
-    voice.stop()
+    voice = discord.utils.get(bot.voice_clients)
+    if voice.is_playing():
+        voice.stop()
+        await ctx.send("Stopping!")
+    elif voice.is_paused:
+        await ctx.send("Music is currently stopped. Music must be playing to stop.")
+    else:
+        await ctx.send("There is no music playing.")
+
+
+# test command; tests random stuff
+@bot.command()
+async def test(ctx):
+    await ctx.send("your test subject here")
 
 # runs bot with bot token
 bot.run('your-token')
