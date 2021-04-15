@@ -93,9 +93,9 @@ async def leave(ctx):
 # pause command; pauses music playing
 @bot.command()
 async def pause(ctx):
-    voice = discord.utils.get(bot.voice_clients)
-    if voice.is_playing():
-        voice.pause()
+    music = discord.utils.get(bot.voice_clients)
+    if music.is_playing():
+        music.pause()
         await ctx.send("Pausing!")
     else:
         await ctx.send("Currently paused!")
@@ -103,9 +103,9 @@ async def pause(ctx):
 # resume command; resumes music
 @bot.command()
 async def resume(ctx):
-    voice = discord.utils.get(bot.voice_clients)
-    if voice.is_paused():
-        voice.resume()
+    music = discord.utils.get(bot.voice_clients)
+    if music.is_paused():
+        music.resume()
         await ctx.send("Resuming!")
     else:
         await ctx.send("Currently playing!")
@@ -113,15 +113,14 @@ async def resume(ctx):
 # stop command; stops playing music
 @bot.command()
 async def stop(ctx):
-    voice = discord.utils.get(bot.voice_clients)
-    if voice.is_playing():
-        voice.stop()
+    music = discord.utils.get(bot.voice_clients)
+    if music.is_playing():
+        music.stop()
         await ctx.send("Stopping!")
-    elif voice.is_paused:
+    elif music.is_paused:
         await ctx.send("Music is currently stopped. Music must be playing to stop.")
     else:
         await ctx.send("There is no music playing.")
-
 
 # test command; tests random stuff
 @bot.command()
