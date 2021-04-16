@@ -66,6 +66,60 @@ async def drip(ctx):
     drip = discord.utils.get(bot.voice_clients)
     drip.play(discord.FFmpegPCMAudio("drip.mp3"))
 
+# play command; plays song like a music bot
+@bot.command()
+async def p(ctx, *, msg):
+    song_there = os.path.isfile("song.mp3")
+    try:
+        if song_there:
+            os.remove("song.mp3")
+    except PermissionError:
+        await ctx.send("Wait for the current playing music to end or use the `stop` command.")
+        return
+
+    try:
+        channel = ctx.author.voice.channel
+        await channel.connect()
+    except discord.errors.ClientException:
+        await ctx.send("Searching...")
+    except AttributeError:
+        await ctx.send("You're not connected to a voice channel.")
+    else:
+        await ctx.send("Searching...")
+
+    music = discord.utils.get(bot.voice_clients)
+
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'noplaylist': 'True',
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '128',
+        }],
+    }
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        try:
+            get(msg)
+        except:
+            dict = ydl.extract_info(f"ytsearch:{msg}", download=False)['entries'][0]
+            song = (dict['webpage_url'])
+        else:
+            song = msg
+        dl = str(song)
+        ydl.download([dl])
+        for file in os.listdir("./"):
+            if file.endswith(".mp3"):
+                os.rename(file, "song.mp3")
+    music.play(discord.FFmpegPCMAudio("song.mp3"))
+
+    try:
+        title = (dict['title'])
+    except:
+        title = "your requested song" # incomplete
+
+    await ctx.send("Now playing: " + title)
+    
 # join command; joins voice channel
 @bot.command()
 async def join(ctx):
