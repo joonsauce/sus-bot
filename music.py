@@ -1,22 +1,6 @@
 from setting import *
 
-# sets the queue list
-queue = []
-# sets the queued songs links' list
-links = []
-
-# sets parameters for YouTubeDL library
-ydl_opts = {
-        'format': 'bestaudio/best',
-        'noplaylist': 'True',
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '128',
-        }],
-}
-
-# join command; makes the bot join a voice channel
+# join command; makes the bot join a voice channel; for debugging purposes
 @bot.command()
 async def join(ctx):
     try:
@@ -70,18 +54,20 @@ async def stop(ctx):
 # drip command; plays among us drip
 @bot.command()
 async def drip(ctx):
-    try:
-        channel = ctx.author.voice.channel
-        await channel.connect()
-    except discord.errors.ClientException:
-        await ctx.send("Now playing: Among Us Drip")
-    except AttributeError:
-        await ctx.send("You're not connected to a voice channel.")
+    if ctx.author.bot:
+        await ctx.send("You're a bot, fuck you")
     else:
-        await ctx.send("Now playing: Among Us Drip")
-    drip = discord.utils.get(bot.voice_clients)
-    drip.play(discord.FFmpegPCMAudio("music/drip.mp3"))
-
+        try:
+            channel = ctx.author.voice.channel
+            await channel.connect()
+        except discord.errors.ClientException:
+            await ctx.send("Now playing: Among Us Drip")
+        except AttributeError:
+            await ctx.send("You're not connected to a voice channel.")
+        else:
+            await ctx.send("Now playing: Among Us Drip")
+        drip = discord.utils.get(bot.voice_clients)
+        drip.play(discord.FFmpegPCMAudio("music/drip.mp3"))
 
 # roll command; rick rolls
 @bot.command()
