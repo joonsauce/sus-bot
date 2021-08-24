@@ -2,17 +2,20 @@ import asyncio
 import discord
 import logging
 import os
+import praw
 import random
 import requests
-import youtube_dl
+import requests.auth
 from discord.ext import commands
 from discord.voice_client import VoiceClient
+from PIL import Image, ImageOps
+from redditAPI import *
 from requests import get
 
-# sets the prefix to use the bot; use whichever, s! is included as it is what I used
+# sets the prefix to use the bot
 prefix = "s!"
 # sets description of the bot
-description = "Your description here"
+description = "The bot is definitely NOT venting"
 
 # bot logging events
 
@@ -27,7 +30,7 @@ handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(me
 # adds handler
 logger.addHandler(handler)
 
-# properly sets prefix of bot
+# sets prefix of bot
 bot = commands.Bot(command_prefix=prefix)
 
 # removes help command so a custom one can be put in
@@ -36,29 +39,28 @@ bot.remove_command('help')
 # sets discord activity status
 @bot.event
 async def on_ready():
-    # again, add whatever presence you want, I just have set a default one
+    print("Status: OK")
     await bot.change_presence(activity=discord.Game("Not venting"))
 
 # help command; makes bot send description of every command it accepts
 @bot.command()
 async def help(ctx, *, msg=''):
     embed = discord.Embed(
-        color = discord.Colour.dark_blue()
+        color = discord.Colour.dark_red()
     )
     embed.set_author(name="sus bot help")
     if msg == '':
         embed.add_field(name="drip", value='Plays Among Us Drip if user is connected to a voice channel. Usage: s!drip', inline="False")
         embed.add_field(name="join", value='Makes bot join the voice channel the user is in. Usage: s!join', inline="False")
         embed.add_field(name="leave", value='Makes bot leave the voice channel it is in. Usage: s!leave', inline="False")
-        embed.add_field(name="p", value='Makes bot play specified song. Usage: s!p <video title> or <video link>', inline="False")
-        embed.add_field(name="play", value='Makes bot play specified song. Usage: s!play <video title> or <video link>',inline="False")
+        embed.add_field(name="suslogo", value='Returns image of susbot Usage: s!suslogo', inline="False")
         embed.add_field(name="pp", value='Pauses and resumes music playing. Usage: s!pp', inline="False")
         embed.add_field(name="q", value='Returns queued songs. Usage: s!q', inline="False")
         embed.add_field(name="roll", value='Makes bot run a virtual roll of dice. Usage: s!roll', inline="False")
         embed.add_field(name="scan", value='Makes bot run an Among Us style medbay scan. Usage: s!scan <user>*', inline="False")
         embed.add_field(name="stop", value='Makes bot stop whatever music is playing. Usage: s!stop', inline="False")
         embed.add_field(name="sus", value='Susses another user. Usage: s!sus <user> <action>', inline="False")
-        embed.add_field(name="susimg", value='Returns avatar of tagged user. Usage: s!susimg <user>*', inline="False")
+        embed.add_field(name="susimg", value='Returns avatar of tagged user in Among Us suit. Usage: s!susimg <user>*', inline="False")
         embed.add_field(name="susrate", value='Returns susrate of tagged user. Usage: s!susrate <user>*', inline="False")
     elif msg == 'drip':
         embed.add_field(name="drip", value='Plays Among Us Drip if user is connected to a voice channel. Usage: s!drip',
@@ -69,14 +71,8 @@ async def help(ctx, *, msg=''):
     elif msg == 'leave':
         embed.add_field(name="leave", value='Makes bot leave the voice channel it is in. Usage: s!leave',
                         inline="False")
-    elif msg == 'nathansus':
-        embed.add_field(name="nathansus", value='Returns image of nathansus Usage: s!nathansus', inline="False")
-    elif msg == 'p':
-        embed.add_field(name="p", value='Makes bot play specified song. Usage: s!p <video title> or <video link>',
-                        inline="False")
-    elif msg =='play':
-        embed.add_field(name="play", value='Makes bot play specified song. Usage: s!play <video title> or <video link>',
-                        inline="False")
+    elif msg == 'suslogo':
+        embed.add_field(name="nathansus", value='Returns image of susbot Usage: s!suslogo', inline="False")
     elif msg == 'pp':
         embed.add_field(name="pp", value='Pauses and resumes music playing. Usage: s!pp', inline="False")
     elif msg == 'q':
@@ -91,7 +87,7 @@ async def help(ctx, *, msg=''):
     elif msg == 'sus':
         embed.add_field(name="sus", value='Susses another user. Usage: s!sus <user> <action>', inline="False")
     elif msg == 'susimg':
-        embed.add_field(name="susimg", value='Returns avatar of tagged user. Usage: s!susimg <user>*', inline="False")
+        embed.add_field(name="susimg", value='Returns avatar of tagged user in Among Us suit. Usage: s!susimg <user>*', inline="False")
     elif msg == 'susrate':
         embed.add_field(name="susrate", value='Returns susrate of tagged user. Usage: s!susrate <user>*', inline="False")
     else:
