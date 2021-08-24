@@ -26,19 +26,20 @@ hardwired in by the person who wants to use them.
 There are a plenty of commands to choose from. The prefix is `s!`. You can change the prefix to what you want in setting.py
 ### Command Types (Among Us variants)
 - susrate {user}
-  - This command rates a chosen member of the server based on how sus they are. The value is static and does not change.
+  - This command rates a chosen member of the server based on how sus they are. The value is random and changes each time the command is run.
+  - Tagging another user is optional.
 - sus {user} {action}
   - This command targets a user of doing something sus. The bot will return {author} sussed {user} of {action}.
+  - A user must be tagged and an action must be filled out.
 - scan
-  - This command returns a simulated medbay scan from the video game Among Us. The value is static, set per user in each server.
-  - If there is more than one user to use the medbay scan, `<@!usertag>` must be used. If only one person, use `<@usertag>` instead.
+  - This command returns a simulated medbay scan from the video game Among Us. The value is random, and changes each time the command is run.
+  - Added a random element where it may spit out an error; simulating impostors not being able to actually medbay scan.
+- susimg {user}
+  - Puts the command user or the targeted user's profile picture (avatar) into the Among Us character suit.
+  - Tagging a user is optional.
 ### Command Types (Music bot variants)
-- p
-  - Downloads song requested from url or title, then plays through FFMPEG. You MUST have FFMPEG installed on the device you are running the bot on. You can use this command again to queue songs to be played later
 - pp
   - Pauses or resumes the music that is playing. It is toggled, so you can use pp to pause AND resume music.
-- q
-  - Displays songs in queue. Currently very primitive, just displaying the array. This will be updated soon, but it works fine.
 - join
   - Makes the bot join the voice channel the command writer is in.
 - leave
