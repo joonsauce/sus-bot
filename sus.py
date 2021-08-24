@@ -1,6 +1,6 @@
 from setting import *
 
-# suslogo command; makes bot send the susbot image
+# suslogo command; makes bot send the susbot image; you can replace the image with whatever you want and whatever name you want for the command
 @bot.command()
 async def suslogo(ctx):
     await ctx.send(file=discord.File(open('img/susbot.png', 'rb'), 'susbot.png'))
