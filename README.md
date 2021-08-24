@@ -4,6 +4,8 @@
 <img src="img/susbot.png" alt="susbot logo" height=300>
 </p>
 
+# The bot is being largely redeveloped for optimization
+
 # Table of Contents
 - [Sus Discord Bot](#sus-discord-bhot)
 - [Table of Contents](#table-of-contents)
