@@ -1,4 +1,5 @@
 # various pacakges to be imported
+from help import *
 from setting import *
 from sus import *
 from music import *
