@@ -8,11 +8,10 @@ async def help(ctx, *, msg=''):
     )
     embed.set_author(name="sus bot help")
     if msg == '':
-        embed.add_field(name="ari", value='Plays random Ariana Grande song if user is connected to a voice channel. Usage: s!ari', inline="False")
         embed.add_field(name="drip", value='Plays Among Us Drip if user is connected to a voice channel. Usage: s!drip', inline="False")
         embed.add_field(name="join", value='Makes bot join the voice channel the user is in. Usage: s!join', inline="False")
         embed.add_field(name="leave", value='Makes bot leave the voice channel it is in. Usage: s!leave', inline="False")
-        embed.add_field(name="nathansus", value='Returns image of nathansus Usage: s!nathansus', inline="False")
+        embed.add_field(name="suslogo", value='Returns image of susbot Usage: s!suslogo', inline="False")
         embed.add_field(name="pp", value='Pauses and resumes music playing. Usage: s!pp', inline="False")
         embed.add_field(name="roll", value='Makes bot run a virtual roll of dice. Usage: s!roll', inline="False")
         embed.add_field(name="scan", value='Makes bot run an Among Us style medbay scan. Usage: s!scan <user>*', inline="False")
@@ -20,10 +19,6 @@ async def help(ctx, *, msg=''):
         embed.add_field(name="sus", value='Susses another user. Usage: s!sus <user> <action>', inline="False")
         embed.add_field(name="susimg", value='Returns avatar of tagged user in Among Us character. Usage: s!susimg <user>*', inline="False")
         embed.add_field(name="susrate", value='Returns susrate of tagged user. Usage: s!susrate <user>*', inline="False")
-    elif msg == 'ari':
-        embed.add_field(name="ari",
-                        value='Plays random Ariana Grande song if user is connected to a voice channel. Usage: s!ari',
-                        inline="False")
     elif msg == 'drip':
         embed.add_field(name="drip", value='Plays Among Us Drip if user is connected to a voice channel. Usage: s!drip',
                         inline="False")
@@ -33,8 +28,8 @@ async def help(ctx, *, msg=''):
     elif msg == 'leave':
         embed.add_field(name="leave", value='Makes bot leave the voice channel it is in. Usage: s!leave',
                         inline="False")
-    elif msg == 'nathansus':
-        embed.add_field(name="nathansus", value='Returns image of nathansus Usage: s!nathansus', inline="False")
+    elif msg == 'suslogo':
+        embed.add_field(name="nathansus", value='Returns image of susbot Usage: s!suslogo', inline="False")
     elif msg == 'pp':
         embed.add_field(name="pp", value='Pauses and resumes music playing. Usage: s!pp', inline="False")
     elif msg == 'roll':
