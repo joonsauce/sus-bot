@@ -4,11 +4,9 @@
 <img src="img/susbot.png" alt="susbot logo" height=300>
 </p>
 
-# The bot is being largely redeveloped for optimization
+## The bot is being largely redeveloped for optimization
 
 # Table of Contents
-- [Sus Discord Bot](#sus-discord-bhot)
-- [Table of Contents](#table-of-contents)
 - [About the Project](#about-the-project)
 - [Usage](#usage)
   - [Command Types](#command-types)
@@ -16,14 +14,15 @@
 - [The Team](#the-team)
 # About the Project
 A discord bot with influence from the popular indie video game Among Us, with features 
-that combines some qualities of other bots. The bot was intended to be used within one server, 
-so many parts are very server-specific. There is no public link for this bot. However, you can modify and 
-use this bot however you like under the MIT license.
+that mimic parts from Among Us. The bot is designed to be used within just one server, 
+and therefore does not have a public link to make this bot join your server. However, you may modify 
+and use this bot however you like. If you do use this template in a public bot, please give credit to this 
+repository in some way. 
 # Usage
-At the moment, the bot is configured to be customized per server; some commands need to be 
-hardwired in by the person who wants to use them.
-
-There are a plenty of commands to choose from. The prefix is `s!`. You can change the prefix to what you want in setting.py
+The bot is *customizable*; it is configured to your taste for your own server. This means that I don't provide anywhere to 
+host the bot, you have to find it yourself. To host you can just run `bot.py` in your choice of IDE or find a hosting provider.
+All of the commands have been designed to be customized, guides for customizing all of them will come soon. The default prefix 
+to use the bot is `s!`, but you can change that in `setting.py`. 
 ### Command Types (Among Us variants)
 - susrate {user}
   - This command rates a chosen member of the server based on how sus they are. The value is random and changes each time the command is run.
@@ -50,8 +49,9 @@ There are a plenty of commands to choose from. The prefix is `s!`. You can chang
   - This command plays a specific song (in my case, Among Us Drip) in a voice channel. The song can be any you want, as long as it is formatted right. You must download the song yourself, the song isn't included in this repo.
 - roll
   - Was meant to be a "gambling" feature but was converted into Rick Roll player.
+  - A separate, "gambling" feature is being worked on.
 
 # License
 This project is released under the MIT license, see `LICENSE` for more info.
 # The Team
-Joonseo Lee - [LinkedIn](https://www.linkedin.com/joonsauce), [Website](http://joonsauce.me)
+Joonseo Lee - [LinkedIn](https://www.linkedin.com/joonsauce), [Website](https://joonsauce.me)
