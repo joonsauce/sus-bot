@@ -39,12 +39,28 @@ async def susimg(ctx, *, msg: discord.User=''):
         avatar = msg.avatar_url
     # sets it as a string so the code doesn't freak out
     pfp_url = str(avatar)
-    # downloads image
-    with requests.get(pfp_url) as r:
-        img = r.content
-    # saves image
-    with open('image.png', 'wb') as handler:
-        handler.write(img)
+    # checks if the profile picture is a gif
+    if pfp_url[:-10].endswith("gif"):
+        # downloads image
+        with requests.get(pfp_url) as r:
+            img = r.content
+        # saves image
+        with open('gifImage.gif', 'wb') as handler:
+            handler.write(img)
+        # converts image into RGBA mode
+        frame = Image.open("gifImage.gif").convert("RGBA")
+        # finds the first frame of gif
+        frame.seek(0)
+        # saves the first frame as the image
+        frame.save("image.png")
+    # if the profile picture is not a gif
+    else:
+        # downloads image
+        with requests.get(pfp_url) as r:
+            img = r.content
+        # saves image
+        with open('image.png', 'wb') as handler:
+            handler.write(img)
     # this is the image that "cuts" the profile picture
     mask = Image.open("img/Red_body_mask.png").convert('L')
     # this is the profile picture
@@ -60,7 +76,7 @@ async def susimg(ctx, *, msg: discord.User=''):
     susimg.save('final.png')
     # sends the image back
     await ctx.send(file=discord.File(open('final.png', 'rb'), 'final.png'))
-
+    
 # different among us game feature commands below
 
 # medbay command; medbay scans user
