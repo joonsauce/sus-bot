@@ -1,12 +1,17 @@
+# used to import all bot settings
 from setting import *
 
 # help command; makes bot send description of every command it accepts
 @bot.command()
 async def help(ctx, *, msg=''):
+    # sets embed as the discord embed
     embed = discord.Embed(
+        # sets the theme of the embed as dark red, but you can change it to whatever you want
         color = discord.Colour.dark_red()
     )
+    # sets the title of the embed as "sus bot help"
     embed.set_author(name="sus bot help")
+    # if there is no message following the command, it displays all commands this bot has
     if msg == '':
         embed.add_field(name="drip", value='Plays Among Us Drip if user is connected to a voice channel. Usage: s!drip', inline="False")
         embed.add_field(name="join", value='Makes bot join the voice channel the user is in. Usage: s!join', inline="False")
@@ -18,7 +23,9 @@ async def help(ctx, *, msg=''):
         embed.add_field(name="stop", value='Makes bot stop whatever music is playing. Usage: s!stop', inline="False")
         embed.add_field(name="sus", value='Susses another user. Usage: s!sus <user> <action>', inline="False")
         embed.add_field(name="susimg", value='Returns avatar of tagged user in Among Us character. Usage: s!susimg <user>*', inline="False")
+        embed.add_field(name="susmeme", value='Returns a random meme from r/amongusmemes. Usage: s!susmeme', inline="False")
         embed.add_field(name="susrate", value='Returns susrate of tagged user. Usage: s!susrate <user>*', inline="False")
+    # below is all of the separate commands you can get info about 
     elif msg == 'drip':
         embed.add_field(name="drip", value='Plays Among Us Drip if user is connected to a voice channel. Usage: s!drip',
                         inline="False")
@@ -43,10 +50,12 @@ async def help(ctx, *, msg=''):
         embed.add_field(name="sus", value='Susses another user. Usage: s!sus <user> <action>', inline="False")
     elif msg == 'susimg':
         embed.add_field(name="susimg", value='Returns avatar of tagged user in Among Us character. Usage: s!susimg <user>*', inline="False")
+    elif msg == 'susmeme':
+        embed.add_field(name="susmeme", value='Returns a random meme from r/amongusmemes. Usage: s!susmeme', inline="False")
     elif msg == 'susrate':
         embed.add_field(name="susrate", value='Returns susrate of tagged user. Usage: s!susrate <user>*', inline="False")
-    else:
-        pass
+    
+    # adds line indicating that a star means the element is optional
     embed.add_field(name="OTHER THINGS TO NOTE", value='Any element with a * beside it means the element is optional.')
-
+    # makes the bot send the embed as the message
     await ctx.send(embed=embed)
