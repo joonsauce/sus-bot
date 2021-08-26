@@ -37,6 +37,8 @@ to use the bot is `s!`, but you can change that in `setting.py`.
 - susimg {user}
   - Puts the command user or the targeted user's profile picture (avatar) into the Among Us character suit.
   - Tagging a user is optional.
+- susmeme
+  - Sends random meme from a Reddit subreddit of choice with the original Reddit post caption as the title
 ### Command Types (Music bot variants)
 - pp
   - Pauses or resumes the music that is playing. It is toggled, so you can use pp to pause AND resume music.
