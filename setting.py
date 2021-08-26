@@ -1,15 +1,15 @@
 import asyncio
+import asyncpraw
 import discord
 import logging
 import os
-import praw
 import random
+import re
 import requests
 import requests.auth
 from discord.ext import commands
 from discord.voice_client import VoiceClient
 from PIL import Image, ImageOps
-from redditAPI import *
 from requests import get
 
 # sets the prefix to use the bot
