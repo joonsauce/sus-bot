@@ -19,4 +19,4 @@ async def test(ctx):
     await ctx.send("You think you're funny huh?")
 
 # makes the bot run with the bot token
-bot.run('your-token-here')
+bot.run(bot_token)
