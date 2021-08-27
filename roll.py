@@ -82,28 +82,28 @@ def getResult(total, bet, location):
         final_cash = str(total - bet)
         response = patchResult(location, final_cash)
         if response == -1:
-            return "There has been an error. Please try again later."
+            return "There has been an error. Please try again later. Code: sbroll_patchResult"
         else:
             return "Unfortunately, you lost some susCash. You now have {} susCash.".format(final_cash)
     elif rolled > 4 and rolled <= 6:
         final_cash = str(total + bet)
         response = patchResult(location, final_cash)
         if response == -1:
-            return "There has been an error. Please try again later."
+            return "There has been an error. Please try again later. Code: sbroll_patchResult"
         else:
             return "You won some susCash! You now have {} susCash.".format(final_cash)
     elif rolled > 6 and rolled <= 8:
         final_cash = str(total - bet)
         response = patchResult(location, final_cash)
         if response == -1:
-            return "There has been an error. Please try again later."
+            return "There has been an error. Please try again later. Code: sbroll_patchResult"
         else:
             return "Unfortunately, you lost some susCash. You now have {} susCash.".format(final_cash)
     elif rolled > 8 and rolled <= 10:
         final_cash = str(total + bet)
         response = patchResult(location, final_cash)
         if response == -1:
-            return "There has been an error. Please try again later."
+            return "There has been an error. Please try again later. Code: sbroll_patchResult"
         else:
             return "You won some susCash! You now have {} susCash.".format(final_cash)
 
@@ -111,51 +111,65 @@ def getResult(total, bet, location):
 @bot.command()
 async def roll(ctx, *, msg=''):
     if not msg:
-        await ctx.send("Please enter the amount of susCash you wish to use.")
+        await ctx.send("Please enter the amount of susCash you wish to use. Code: sbroll_nosusCash")
     else:
         try:
             bet = int(msg)
         except ValueError:
-            await ctx.send("The amount of susCash you entered is not a number.")
+            await ctx.send("The amount of susCash you entered is not a number. Code: sbroll_wrongsusCash")
         else:
             data = getRollData()
             if data == -1:
-                await ctx.send("There has been an error. Please try again later.")
+                await ctx.send("There has been an error. Please try again later. Code: sbroll_getRollData")
             else:
                 user_there = findUser(str(ctx.author.id))
                 if user_there == -1:
-                    await ctx.send("There has been an error. Please try again later.")
+                    await ctx.send("There has been an error. Please try again later. Code: sbroll_findUser")
                 elif user_there == -2:
                     response = addUser(str(ctx.author.id))
                     if response == -1:
-                        await ctx.send("There has been an error. Please try again later.")
+                        await ctx.send("There has been an error. Please try again later. Code: sbroll_addUser")
                     else:
                         user_there = findUser(str(ctx.author.id))
+                        if user_there == -1:
+                            await ctx.send("There has been an error. Please try again later. Code: sbroll_findUser")
+                        else:
+                            pass
                 data = getRollData()
-                total = int(data["records"][user_there]["fields"]["sus"])
-                location = str(data["records"][user_there]["id"])
-                if bet > total:
-                    await ctx.send("You cannot bet more than the total amount of sus you have.")
+                if data == -1:
+                    await ctx.send("There has been an error. Please try again later. Code: sbroll_getRollData")
                 else:
-                    rolled = getResult(total, bet, location)
-                    await ctx.send(rolled)
+                    total = int(data["records"][user_there]["fields"]["sus"])
+                    location = str(data["records"][user_there]["id"])
+                    if bet > total:
+                        await ctx.send("You cannot bet more than the total amount of sus you have.")
+                    else:
+                        rolled = getResult(total, bet, location)
+                        await ctx.send(rolled)
 
 # bal command; allows user to check how much susCash they have
 @bot.command()
 async def bal(ctx):
     data = getRollData()
     if data == -1:
-        await ctx.send("There has been an error. Please try again later.")
+        await ctx.send("There has been an error. Please try again later. Code: sbbal_getRollData")
     else:
         user_there = findUser(str(ctx.author.id))
         if user_there == -1:
-            await ctx.send("There has been an error. Please try again later.")
+            await ctx.send("There has been an error. Please try again later. Code: sbbal_findUser")
         elif user_there == -2:
             response = addUser(str(ctx.author.id))
             if response == -1:
-                await ctx.send("There has been an error. Please try again later.")
+                await ctx.send("There has been an error. Please try again later. Code: sbbal_addUser")
             else:
                 user_there = findUser(str(ctx.author.id))
+                if user_there == -1:
+                    await ctx.send("There has been an error. Please try again later. Code: sbroll_findUser")
+                else:
+                    pass
         data = getRollData()
-        total = int(data["records"][user_there]["fields"]["sus"])
-        await ctx.send("You currently have {0} susCash under your account.".format(total))
+        if data == -1:
+            await ctx.send("There has been an error. Please try again later. Code: sbroll_getRollData")
+        else:
+            total = int(data["records"][user_there]["fields"]["sus"])
+            await ctx.send("You currently have {0} susCash under your account.".format(total))
