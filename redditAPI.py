@@ -3,12 +3,9 @@ from setting import *
 
 # sets parameters for using AsyncPRAW
 reddit = asyncpraw.Reddit(
-    # replace the string with your client id
-    client_id = '[your client id]',
-    # replace the string with your client secret
-    client_secret = '[your client secret]',
-    # repalce the string with your user agent
-    user_agent = '[your user agent]',
+    client_id = reddit_id,
+    client_secret = reddit_secret,
+    user_agent = reddit_agent,
 )
 
 # susmeme command; sends random meme from r/amongusmemes
