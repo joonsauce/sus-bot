@@ -13,6 +13,7 @@ async def help(ctx, *, msg=''):
     embed.set_author(name="sus bot help")
     # if there is no message following the command, it displays all commands this bot has
     if msg == '':
+        embed.add_field(name="bal", value='Allows user to check how much susCash they have. Usage: s!bal', inline="False")
         embed.add_field(name="drip", value='Plays Among Us Drip if user is connected to a voice channel. Usage: s!drip', inline="False")
         embed.add_field(name="join", value='Makes bot join the voice channel the user is in. Usage: s!join', inline="False")
         embed.add_field(name="leave", value='Makes bot leave the voice channel it is in. Usage: s!leave', inline="False")
@@ -26,6 +27,8 @@ async def help(ctx, *, msg=''):
         embed.add_field(name="susmeme", value='Returns a random meme from r/amongusmemes. Usage: s!susmeme', inline="False")
         embed.add_field(name="susrate", value='Returns susrate of tagged user. Usage: s!susrate <user>*', inline="False")
     # below is all of the separate commands you can get info about 
+    elif msg == 'bal':
+        embed.add_field(name="bal", value='Allows user to check how much susCash they have. Usage: s!bal', inline="False")
     elif msg == 'drip':
         embed.add_field(name="drip", value='Plays Among Us Drip if user is connected to a voice channel. Usage: s!drip',
                         inline="False")
