@@ -114,22 +114,3 @@ async def drip(ctx):
         drip = discord.utils.get(bot.voice_clients)
         # makes bot play sound of choice
         drip.play(discord.FFmpegPCMAudio("music/drip.mp3"))
-
-# roll command; rick rolls; works the same as the drip command
-@bot.command()
-async def roll(ctx):
-    if ctx.author.bot:
-        await ctx.send("You're a bot, screw you!")
-    else:
-        try:
-            channel = ctx.author.voice.channel
-            await channel.connect()
-        except discord.errors.ClientException:
-            await ctx.send("Rollin'...")
-        except AttributeError:
-            await ctx.send("You're not connected to a voice channel.")
-        else:
-            await ctx.send("Rollin'...")
-        drip = discord.utils.get(bot.voice_clients)
-        drip.play(discord.FFmpegPCMAudio("music/roll.mp3"))         
-    
