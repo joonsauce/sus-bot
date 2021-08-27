@@ -50,9 +50,10 @@ to use the bot is `s!`, but you can change that in `setting.py`.
   - Makes the bot stop the music playing. Stopping the currently playing music will make the next song in the queue play if there is a song in the queue.
 - drip
   - This command plays a specific song (in my case, Among Us Drip) in a voice channel. The song can be any you want, as long as it is formatted right. You must download the song yourself, the song isn't included in this repo.
+### Command Types (Other)
 - roll
-  - Was meant to be a "gambling" feature but was converted into Rick Roll player.
-  - A separate, "gambling" feature is being worked on.
+  - Gambling feature, featuring a non-monetary convertible susCash as the chips
+  - Currently the odds are 4/6, but can be adjusted and new seeding features are being worked on
 
 # License
 This project is released under the MIT license, see `LICENSE` for more info.
