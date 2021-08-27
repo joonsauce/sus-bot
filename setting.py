@@ -11,6 +11,7 @@ from discord.ext import commands
 from discord.voice_client import VoiceClient
 from PIL import Image, ImageOps
 from requests import get
+from secret import *
 
 # sets the prefix to use the bot
 prefix = "s!"
