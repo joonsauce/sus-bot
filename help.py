@@ -19,7 +19,7 @@ async def help(ctx, *, msg=''):
         embed.add_field(name="leave", value='Makes bot leave the voice channel it is in. Usage: s!leave', inline="False")
         embed.add_field(name="suslogo", value='Returns image of susbot Usage: s!suslogo', inline="False")
         embed.add_field(name="pp", value='Pauses and resumes music playing. Usage: s!pp', inline="False")
-        embed.add_field(name="roll", value='Makes bot run a virtual roll of dice. Usage: s!roll', inline="False")
+        embed.add_field(name="roll", value='Makes bot run a simulated game of dice roll. Usage: s!roll', inline="False")
         embed.add_field(name="scan", value='Makes bot run an Among Us style medbay scan. Usage: s!scan <user>*', inline="False")
         embed.add_field(name="stop", value='Makes bot stop whatever music is playing. Usage: s!stop', inline="False")
         embed.add_field(name="sus", value='Susses another user. Usage: s!sus <user> <action>', inline="False")
@@ -43,7 +43,7 @@ async def help(ctx, *, msg=''):
     elif msg == 'pp':
         embed.add_field(name="pp", value='Pauses and resumes music playing. Usage: s!pp', inline="False")
     elif msg == 'roll':
-        embed.add_field(name="roll", value='Makes bot run a virtual roll of dice. Usage: s!roll', inline="False")
+        embed.add_field(name="roll", value='Makes bot run a simulated game of dice roll. Usage: s!roll', inline="False")
     elif msg == 'scan':
         embed.add_field(name="scan", value='Makes bot run an Among Us style medbay scan of the user. Usage: s!scan',
                         inline="False")
