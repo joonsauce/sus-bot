@@ -3,6 +3,8 @@
 from help import *
 # links to the random sus meme feature
 from redditAPI import *
+# links to the roll features
+from roll import *
 # links to the various bot settings
 from setting import *
 # links to the different "sus" features
