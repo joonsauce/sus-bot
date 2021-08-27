@@ -32,4 +32,4 @@ async def susmeme(ctx):
     # if verification fails, send out an error message; this may be changed to repeat until it works
     else:
         # makes bot send error message 
-        await ctx.send("An error has occured, please try again later.")
+        await ctx.send("An error has occured, please try again later. Code: sbsusm_verificationFailed")
