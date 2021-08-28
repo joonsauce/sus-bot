@@ -41,8 +41,6 @@ def findUser(number):
         return -1
     # if no error from getting data, runs the findUser function
     else:
-        # variables for different parts of the function
-        data_location = int()
         # checks all rows of the database individually
         for i in range(len(data["records"])):
             # sets the user_id to compare to the user's id
