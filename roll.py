@@ -156,11 +156,32 @@ def getResult(total, bet, location):
         else:
             return "You won some susCash! You now have {} susCash.".format(final_cash)
 
+# function to go check through certain cases
+def verifyResults(data, user_location, bet):
+    # gets the amount of susCash the user has in the database
+    total = int(data["records"][user_location]["fields"]["sus"])
+    # gets the location of the user's data
+    location = str(data["records"][user_location]["id"])
+    # if the user has no susCash, return error
+    if total == 0:
+        # return error
+        return "You do not have enough susCash to s!roll at the moment."
+    # if user's bet is bigger than the amount of susCash they have, return error
+    elif bet > total:
+        # return error
+        return "You cannot bet more than the total amount of sus you have."
+    # run code as normal if nothing is abnormal
+    else:
+        # gets result from getResult function
+        rolled = getResult(total, bet, location)
+        # returns result
+        return rolled
+
 # roll command; makes bot run a simulated gamble
 @bot.command()
 async def roll(ctx, *, msg=''):
     if not msg:
-        await ctx.send("Please enter the amount of susCash you wish to use. Code: sbroll_nosusCash")
+        await ctx.send("Please enter the amount of susCash you wish to use. Code: sbroll_nosusCashEntered")
     else:
         try:
             bet = int(msg)
@@ -182,22 +203,19 @@ async def roll(ctx, *, msg=''):
                         user_there = findUser(str(ctx.author.id))
                         if user_there == -1:
                             await ctx.send("There has been an error. Please try again later. Code: sbroll_findUser")
+                        elif user_there == -2:
+                            await ctx.send("There has been an error. Please try again later. Code: sbroll_unknownfindUser")
                         else:
                             data = getRollData()
                             if data == -1:
                                 await ctx.send(
                                     "There has been an error. Please try again later. Code: sbroll_getRollData")
                             else:
-                                pass
-                total = int(data["records"][user_there]["fields"]["sus"])
-                location = str(data["records"][user_there]["id"])
-                if total == 0:
-                    await ctx.send("You do not have enough susCash to s!roll at the moment.")
-                elif bet > total:
-                    await ctx.send("You cannot bet more than the total amount of sus you have.")
+                                result = verifyResults(data, user_there, bet)
+                                await ctx.send(result)
                 else:
-                    rolled = getResult(total, bet, location)
-                    await ctx.send(rolled)
+                    result = verifyResults(data, user_there, bet)
+                    await ctx.send(result)
 
 # bal command; allows user to check how much susCash they have
 @bot.command()
