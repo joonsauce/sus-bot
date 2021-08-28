@@ -188,34 +188,38 @@ async def roll(ctx, *, msg=''):
         except ValueError:
             await ctx.send("The amount of susCash you entered is not a number. Code: sbroll_wrongsusCash")
         else:
-            data = getRollData()
-            if data == -1:
-                await ctx.send("There has been an error. Please try again later. Code: sbroll_getRollData")
+            if bet <= 0:
+                await ctx.send("Please enter a positive number to bet.")
             else:
-                user_there = findUser(str(ctx.author.id))
-                if user_there == -1:
-                    await ctx.send("There has been an error. Please try again later. Code: sbroll_findUser")
-                elif user_there == -2:
-                    response = addUser(str(ctx.author.id))
-                    if response == -1:
-                        await ctx.send("There has been an error. Please try again later. Code: sbroll_addUser")
-                    else:
-                        user_there = findUser(str(ctx.author.id))
-                        if user_there == -1:
-                            await ctx.send("There has been an error. Please try again later. Code: sbroll_findUser")
-                        elif user_there == -2:
-                            await ctx.send("There has been an error. Please try again later. Code: sbroll_unknownfindUser")
-                        else:
-                            data = getRollData()
-                            if data == -1:
-                                await ctx.send(
-                                    "There has been an error. Please try again later. Code: sbroll_getRollData")
-                            else:
-                                result = verifyResults(data, user_there, bet)
-                                await ctx.send(result)
+                data = getRollData()
+                if data == -1:
+                    await ctx.send("There has been an error. Please try again later. Code: sbroll_getRollData")
                 else:
-                    result = verifyResults(data, user_there, bet)
-                    await ctx.send(result)
+                    user_there = findUser(str(ctx.author.id))
+                    if user_there == -1:
+                        await ctx.send("There has been an error. Please try again later. Code: sbroll_findUser")
+                    elif user_there == -2:
+                        response = addUser(str(ctx.author.id))
+                        if response == -1:
+                            await ctx.send("There has been an error. Please try again later. Code: sbroll_addUser")
+                        else:
+                            user_there = findUser(str(ctx.author.id))
+                            if user_there == -1:
+                                await ctx.send("There has been an error. Please try again later. Code: sbroll_findUser")
+                            elif user_there == -2:
+                                await ctx.send(
+                                    "There has been an error. Please try again later. Code: sbroll_unknownfindUser")
+                            else:
+                                data = getRollData()
+                                if data == -1:
+                                    await ctx.send(
+                                        "There has been an error. Please try again later. Code: sbroll_getRollData")
+                                else:
+                                    result = verifyResults(data, user_there, bet)
+                                    await ctx.send(result)
+                    else:
+                        result = verifyResults(data, user_there, bet)
+                        await ctx.send(result)
 
 # bal command; allows user to check how much susCash they have
 @bot.command()
