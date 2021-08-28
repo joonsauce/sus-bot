@@ -1,5 +1,6 @@
 # import bot settings
 from setting import *
+from roll_functions import *
 
 # roll command; makes bot run a simulated gamble
 @bot.command()
