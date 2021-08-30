@@ -1,3 +1,4 @@
+import ast
 import asyncio
 import asyncpraw
 import discord
@@ -7,11 +8,15 @@ import random
 import re
 import requests
 import requests.auth
+import selenium
 from discord.ext import commands
 from discord.voice_client import VoiceClient
+from functools import reduce
 from PIL import Image, ImageOps
 from requests import get
 from secret import *
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 # sets the prefix to use the bot
 prefix = "s!"
