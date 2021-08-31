@@ -1,7 +1,6 @@
 import ast
 import asyncio
 import asyncpraw
-import datetime
 import discord
 import logging
 import os
@@ -10,7 +9,8 @@ import re
 import requests
 import requests.auth
 import selenium
-from datetime import datetime
+import schedule
+import time
 from discord.ext import commands
 from discord.voice_client import VoiceClient
 from functools import reduce
@@ -19,6 +19,7 @@ from requests import get
 from secret import *
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.edge.options import Options
 
 # sets the prefix to use the bot
 prefix = "s!"
