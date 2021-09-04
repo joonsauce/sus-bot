@@ -5,6 +5,7 @@
 </p>
 
 ## The bot is being largely redeveloped for optimization
+### Development has been put on pause for the time being
 There is a list of things being worked on for this bot in the [projects](https://github.com/joonsauce/susbot/projects) section of this repo.
 
 # Table of Contents
