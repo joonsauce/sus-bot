@@ -4,7 +4,7 @@
 <img src="img/susbot.png" alt="susbot logo" height=300>
 </p>
 
-## Discord.py has been discontinued, so the bot will be rewritten using Nextcord at a later point in time, as the development has been paused for the time being
+## The bot is currently ongoing massive code restructure for efficiency
 There is a list of things being worked on for this bot in the [projects](https://github.com/joonsauce/susbot/projects) section of this repo.
 
 # Table of Contents
