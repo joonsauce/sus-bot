@@ -1,6 +1,11 @@
 # used to import all bot settings
 from setting import *
 
+'''
+is there any way to improve this command? seems extra long for no reason
+- might be an idea to put all of this information into a local db then call for it instead
+'''
+
 # help command; makes bot send description of every command it accepts
 @bot.command()
 async def help(ctx, *, msg=''):
@@ -62,6 +67,7 @@ async def help(ctx, *, msg=''):
         embed.add_field(name="susmeme", value='Returns a random meme from r/amongusmemes. Usage: s!susmeme', inline=False)
     elif msg == 'susrate':
         embed.add_field(name="susrate", value='Returns susrate of tagged user. Usage: s!susrate <user>*', inline=False)
+    # sends error message that the command the user is looking for doesn't exist
     else:
         embed.add_field(name="No command", value='There is no command with that name. Use ~help to view the full list of commands', inline=False)
     
