@@ -4,6 +4,9 @@
 <img src="img/susbot.png" alt="susbot logo" height=300>
 </p>
 
+## Since the last time I updated this repo, there's been a lot of changes to the way Discord bots are created
+## I will be slowly (but surely) rolling in updates to fix some of the things that are broken due to the new updates
+
 ## The bot is currently ongoing massive code restructure for efficiency
 There is a list of things being worked on for this bot in the [projects](https://github.com/joonsauce/susbot/projects) section of this repo.
 
