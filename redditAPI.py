@@ -3,10 +3,13 @@ from setting import *
 
 # sets parameters for using AsyncPRAW
 reddit = asyncpraw.Reddit(
-    client_id = reddit_id,
-    client_secret = reddit_secret,
-    user_agent = reddit_agent,
+    client_id=reddit_id,
+    client_secret=reddit_secret,
+    user_agent=reddit_agent
 )
+
+# susmeme command isn't working as intended right now - but a fix is on the way
+
 
 # susmeme command; sends random meme from r/amongusmemes
 @bot.command()

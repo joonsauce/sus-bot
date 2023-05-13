@@ -6,8 +6,9 @@ from setting import *
 async def help(ctx, *, msg=''):
     # sets embed as the discord embed
     embed = discord.Embed(
-        # sets the theme of the embed as dark red, but you can change it to whatever you want
-        color = discord.Colour.dark_red()
+        # sets the sidebar of Discord embed to whatever color you want. setting it to None sets it to black.
+        # you can use discord.colors.___() to choose your own color
+        color=None
     )
     # sets the title of the embed as "sus bot help"
     embed.set_author(name="sus bot help")
@@ -61,6 +62,8 @@ async def help(ctx, *, msg=''):
         embed.add_field(name="susmeme", value='Returns a random meme from r/amongusmemes. Usage: s!susmeme', inline=False)
     elif msg == 'susrate':
         embed.add_field(name="susrate", value='Returns susrate of tagged user. Usage: s!susrate <user>*', inline=False)
+    else:
+        embed.add_field(name="No command", value='There is no command with that name. Use ~help to view the full list of commands', inline=False)
     
     # adds line indicating that a star means the element is optional
     embed.add_field(name="OTHER THINGS TO NOTE", value='Any element with a * beside it means the element is optional.')

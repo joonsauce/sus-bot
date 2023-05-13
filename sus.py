@@ -33,10 +33,10 @@ async def susrate(ctx, *, msg=''):
 async def susimg(ctx, *, msg: discord.User=''):
     # if no user is tagged defaults the command user as the person to run through the image laundering
     if not msg:
-        avatar = ctx.author.avatar_url
+        avatar = ctx.author.display_avatar
     # otherwise it is the tagged user's avatar
     else:
-        avatar = msg.avatar_url
+        avatar = msg.display_avatar
     # sets it as a string so the code doesn't freak out
     pfp_url = str(avatar)
     # checks if the profile picture is a gif
